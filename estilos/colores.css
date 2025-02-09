@@ -1,0 +1,22 @@
+* {
+        /*colores*/
+        --color-primario: lightblue;
+        --color-secundario: rgb(211, 211, 211);
+        --color-footer-fondo:#333; /* Gris oscuro */
+        --color-footer-texto: white;
+        --color-resaltado:coral;
+        --color-borde:black;
+        --color-header-fondo:#356292;  /*ISP65*/
+        --color-header-texto:white;
+        --color-modal-oculto: black;
+        --color-modal-activo:white;
+        --color-titulo-principal:antiquewhite;
+        --color-texto:black;
+        --color-input:rgba(84,5,5,1); /*entrada datos*/
+        --color-input-fondo:rgb(233, 226, 245); /*fondo entrada datos*/
+        --color-resultado:rgb(35, 67, 207);
+        --color-semitransparente:rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+        --color-body:#333; /* Gris oscuro */
+        --color-cumple:green;
+        --color-no-cumple:red;
+ }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atenuación de protectores auditivos</title>
+    <link rel="stylesheet" href="./estilos/colores.css">
+    <link rel="stylesheet" href="./estilos/styles1.css">
+    <script defer src="./scripts/script.js"></script>  
+</head>
+<body>
+     
+    <!-- Encabezado con Menú -->
+    <header>
+        <a href="https://isp65-sfe.infd.edu.ar/sitio/" target="_blank">
+            <img src="./img/logoISP65.png" class="logo" alt="Logo ISP 65">
+        </a>
+        <h1>ATENUA App</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Información</a></li>
+                <li><a href="bandasoctava.html" class="active">Bandas de octava</a></li>
+                <li><a href="hml.html">HML</a></li>
+                <li><a href="snr.html">SNR</a></li>
+            </ul>
+            <div class="menu-hamburguesa" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>   
+    <main>
+    <!-- Contenedor principal -->
+    <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR BANDA DE OCTAVA</h2>
+    <main class="contenedor-principal">
+        <!-- Contenedor izquierdo -->
+        <div class="contenedor__izquierda">
+            <!-- Sección 1 -->
+            <section class="seccion1">Sección 1</section>
+            <!-- Sección 2 -->
+            <section class="seccion2">Sección 2</section>
+        </div>
+
+        <!-- Contenedor derecho -->
+        <div class="contenedor__derecha">
+            <!-- Sección 3 -->
+            <section class="seccion3">Sección 3</section>
+            <!-- Sección 4 -->
+            <section class="seccion4">Sección 4</section>
+        </div>
+    </main>
+     <!-- Pie de página -->
+     <footer>
+        <p>© 2025 ATENUA App Web | <a href="#" id="openModal">Acerca de</a></p>
+        <p>I.S.P. N° 65 Amelia Díaz - San Vicente, Prov. Santa Fe</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="./img/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="./img/instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </footer>
+    <!-- Modal de "Acerca de" -->
+    <div id="modalAcerca" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Acerca de</h2>
+            <p class="text__modal">Esta es una aplicación web de código abierto bajo la 
+                <a href="LICENSE.html" target="_blank">licencia MIT.</a>
+            </p>
+            <p class="text__modal">Desarrollado por: Ing. Jorge Mendoza</p>
+            <p class="text__modal">Versión 1.0.0 - 2025 - <a href="README.html" target="_blank">README.</a>
+
+            </p>
+        </div>
+    </div>
+   <!--  <script src="./scripts/app.js"></script> -->
+
+</body>
+</html>
+

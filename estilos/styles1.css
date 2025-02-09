@@ -269,3 +269,64 @@ nav {
     padding: 0%;
    
 }
+
+
+ /* --- RESPONSIVIDAD --- */
+ @media (max-width: 768px) {
+
+ 
+  /* Cambia a diseño de una sola columna */
+
+    .contenedor-principal {
+      width: 100%;
+      flex-direction: column-reverse;
+      align-items: center;
+      margin-left: 0px;
+
+  }
+
+  .section-title {
+    color: var(--color-titulo-principal);
+    opacity: 100;
+  }
+  .contenedor__izquierda {
+      width: 100%;
+      padding: 0%;
+ 
+  }
+
+  .imagen{
+ 
+    height: auto; /* La imagen tomará el 100% del header */
+    width: 17.5rem;  /* Mantiene la proporción */
+   
+  }
+
+  /* Oculta el menú normal y muestra la hamburguesa */
+  .menu {
+      display: none;
+      flex-direction: column;
+      background-color: var(--color-header-fondo);
+      position: absolute;
+      right: 0;
+      top: 60px;
+      width: 150px;
+      padding: 1rem;
+      border-radius: 5px;
+  }
+
+  .menu a {
+      display: block;
+      padding: 0.5rem 0;
+  }
+
+  .menu-hamburguesa {
+      display: flex;
+  }
+
+  /* Muestra el menú cuando se activa */
+  .menu.activo {
+      display: flex;
+  }
+}
+ 

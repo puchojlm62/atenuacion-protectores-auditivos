@@ -38,17 +38,133 @@
         <!-- Contenedor izquierdo -->
         <div class="contenedor__izquierda">
             <!-- Sección 1 -->
-            <section class="seccion1">Sección 1</section>
-            <!-- Sección 2 -->
-            <section class="seccion2">Sección 2</section>
+            <div class="input-group">
+                <p class="titulo-input">Protector auditivo:</p>
+                <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector">
+            </div>
+            <section class="seccion1">
+  
+                <table>
+                    <tr>
+                        <th class="no-editable">Frecuencia (Hz)</th>
+                        <th class="no-editable">63 (opt.)</th>
+                        <th class="no-editable">125</th>
+                        <th class="no-editable">250</th>
+                        <th class="no-editable">500</th>
+                        <th class="no-editable">1000</th>
+                        <th class="no-editable">2000</th>
+                        <th class="no-editable">4000</th>
+                        <th class="no-editable">8000</th>
+                    </tr>
+                    <tr id="filaAtenuacion">
+                        <th class="no-editable">Atenuación media (dB)</th>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                    </tr>
+                    <tr id="filaDesviacion">
+                        <th class="no-editable">Desviación estándar (dB)</th>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                    </tr>
+                    <tr id="filaProteccion">
+                        <th class="no-editable">Protección supuesta (dB)</th>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                    </tr>
+                </table>
+             </section>
+            
+            <div class="input-group">
+                <p class="titulo-input">Ruido del lugar de trabajo:</p>
+                <input type="text" id="protector-auditivo" class="input-name" placeholder="Lugar/Sector/Equipo">
+            </div>
+            <section class="seccion2"> 
+                 <table>
+                    <tr>
+                        <th class="no-editable">Frecuencia (Hz)</th>
+                        <th class="no-editable">63 (opt.)</th>
+                        <th class="no-editable">125</th>
+                        <th class="no-editable">250</th>
+                        <th class="no-editable">500</th>
+                        <th class="no-editable">1000</th>
+                        <th class="no-editable">2000</th>
+                        <th class="no-editable">4000</th>
+                        <th class="no-editable">8000</th>
+                    </tr>
+                    <tr id="filaEspectroMedido">
+                        <th class="no-editable">Espectro medido (dB)</th>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                    </tr>
+ 
+                    <tr id="filaEspectroProtegido">
+                        <th class="no-editable">Espectro protegido (dB)</th>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                        <td class="no-editable-resultado"><input type="text" readonly></td>
+                    </tr>
+                </table>
+ 
+ 
+            </section>
         </div>
 
         <!-- Contenedor derecho -->
         <div class="contenedor__derecha">
             <!-- Sección 3 -->
-            <section class="seccion3">Sección 3</section>
+            <section class="seccion3"></section>
+            <p class="titulo-input">Resultados:</p>
+            <table class="tabla-resultado" >
+                <tr>
+                    <th class="no-editable" ></th>
+                    <th class="leq-columna">LeqA</th>
+
+                </tr>
+                <tr id="filaRuidoMedido">
+                    <th class="no-editable" >Ruido medido</th>
+                    <td class="leq-resultado"><input type="text" readonly></td>
+                </tr>
+                <tr id="filaRuidoAtenuado">
+                    <th class="no-editable" >Ruido atenuado</th>
+                    <td class="leq-resultado" fontsize="22"><input type="text" readonly></td>
+                </tr>
+
+            </table>
             <!-- Sección 4 -->
-            <section class="seccion4">Sección 4</section>
+            <section class="seccion4"></section>
+            <button class="button-draw" onclick="calcularTodo()">
+                <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
+            </button>
+            <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
         </div>
     </main>
      <!-- Pie de página -->
@@ -78,7 +194,7 @@
             </p>
         </div>
     </div>
-   <!--  <script src="./scripts/app.js"></script> -->
+    <script src="./scripts/app.js"></script>
 
 </body>
 </html>

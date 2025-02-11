@@ -22,6 +22,27 @@ html, body {
     flex-direction: column;
 }
 
+/* tablas de ruido y protectores auditivos*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed; /* Ancho fijo para las columnas */
+}
+th, td {
+  border: 1px solid var(--color-borde);
+  padding: 1px;
+   /*overflow: hidden; Oculta el contenido que se desborda 
+  white-space: nowrap;  Evita que el texto se ajuste a varias líneas */
+}
+th {
+  background-color: var(--color-secundario);
+}
+
+th:first-child, /* Selecciona el primer th de cada fila */
+td:first-child { /* Selecciona el primer td de cada fila */
+    width: 25%;
+}
 
 /* Header */
 header {
@@ -206,70 +227,205 @@ nav {
 }
 /* Contenedores laterales */
 .contenedor__izquierda {
-  width: 48%;
+  width: 60%;
   display: flex;
   flex-direction: column;
-  margin-left: 6rem;
-  margin-top: 2rem;
+  margin-left: 3rem;
+  margin-top: 1rem;
   gap: 1rem;
 }
 
-.contenedor__derecha {
-    width: 48%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 6rem;
-    margin-top: 2rem;
-    gap: 1rem;
+.input-group {
+  display: flex; /* Para alinear el label y el input */
+  align-items: center; /* Alinea verticalmente */
 }
 
+.input-group .titulo-input {
+  margin-right: 10px; /* Espacio entre el label y el input */
+}
+
+.titulo-input{
+  font-family: Montserrat;
+  font-weight: SemiBold;
+  font-size: 1.25rem;
+  color: var(--color-texto);
+}
+.input-name {
+  background-color:var(--color-input-fondo);
+  color: var(--color-input);
+  opacity: 1;
+  width: 50%;
+  padding: 0.3125rem;
+  border: 0px solid var(--color-borde);
+  border-radius: 0.9375rem;
+  font-size: 1.25rem;
+  font-family: Montserrat;
+  font-weight: Bold;
+  text-align: left;
+}
+.input-name:hover {
+  background-color:var(--color-resaltado);
+}
+
+/* esta seciion 1 contiene los datos de los protectores*/
 .seccion1{
     display: flex;
     flex-direction: column;
     justify-content:center;
-    width: 50%;
+    width: 100%;
     height: auto;
     border: 0px solid var(--color-borde);
     background-color: var(--color-secundario);
     padding: 0%;
    
 }
+/* Ajusta los estilos de las celdas no editables de la tabla */
+.no-editable {
+  background-color: var(--color-secundario);
+  padding: 1px;
+ 
+}
+
+/* Estilos comunes para inputs en celdas no editables de resultado y editables */
+.no-editable-resultado input[type="text"],
+.editable input[type="text"],
+.editable input[type="number"] {
+    outline: none;
+    border: 1px solid var(--color-borde);
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-input);
+    opacity: 1;
+    border-radius: 2px; /* Simplificado: 2px en todos los lados */
+    font-size: 20px;
+    font-family: Montserrat;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* Estilo específico para inputs no editables de resultado (solo el color de fondo) */
+.no-editable-resultado input[type="text"] {
+    background-color: var(--color-no-editable); /* Amarillo claro */
+}
+
+/* Estilo específico para inputs editables (solo el color de fondo) */
+.editable input[type="text"],
+.editable input[type="number"] {
+    background-color: var(--color-input-fondo);
+}
+
 
 .seccion2{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    width: 50%;
-    height: auto;
-    border: 0px solid var(--color-borde);
-    background-color: var(--color-secundario);
-    padding: 0%;
-   
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  width: 100%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: var(--color-secundario);
+  padding: 0% 0% 1% 0%;
+}
+
+/* FIN Contenedor izquierdo */
+
+.contenedor__derecha {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6rem;
+  margin-top: 1rem;
+  gap: 1rem;
 }
 .seccion3{
     display: flex;
     flex-direction: column;
     justify-content:center;
-    width: 50%;
+    width: 100%;
     height: auto;
     border: 0px solid var(--color-borde);
     background-color: var(--color-secundario);
     padding: 0%;
    
 }
+.tabla-resultado{
+  width: 60%;
+  border-collapse: collapse;
+  text-align: center;
+  align-self: left;
+}
+.leq-resultado input { /* Apunta al input DENTRO de .leq-resultado */
+  outline: none;
+  border: 1px solid var(--color-borde);
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-text-no-editable);
+  opacity: 1;
+  border-radius: 2px; /* Simplificado: 2px en todos los lados */
+  font-size: 22px;
+  font-family: Montserrat;
+  font-weight: bold;
+  box-sizing: border-box;
+  background-color: var(--color-no-editable);
+  
+}
+
+/* Estilos para el td (opcional, para centrar el input o ajustar el espaciado) */
+.leq-resultado {
+  padding: 2px; /* Ejemplo: Ajusta el padding del td */
+  text-align: center; /* Ejemplo: Centra el input dentro del td */
+}
+.leq-columna{
+  width: 20%;
+}
+
 
 .seccion4{
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    width: 50%;
-    height: auto;
-    border: 0px solid var(--color-borde);
-    background-color: var(--color-secundario);
-    padding: 0%;
-   
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  width: 100%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: var(--color-secundario);
+  padding: 0%;
+}
+button {
+  font-family: "Montserrat", bold;
+  border: 0.125rem var(--color-borde);
+  border-radius: 1.6rem;
+  box-shadow: 0 0.25rem 0.5rem var(--color-borde);
+  cursor: pointer;
+  align-items: center;
+  margin: 1rem;
+
+}
+.button-draw {
+  display: flex;
+  align-items:center;
+  align-self: center;
+  justify-content:space-around;
+  background-color: var(--color-secundario);
+  width: 18rem;
+  font-size: 1rem;
+  height: 1.875rem;
+  margin-top: 0.5rem;
 }
 
+button:hover {
+  background-color: var(--color-resaltado);
+}
+
+
+
+input {
+  width: 100%;
+  border: none;
+  text-align: center;
+  background-color: inherit;
+}
 
  /* --- RESPONSIVIDAD --- */
  @media (max-width: 768px) {

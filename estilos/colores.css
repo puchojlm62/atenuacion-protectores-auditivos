@@ -19,4 +19,6 @@
         --color-body:#333; /* Gris oscuro */
         --color-cumple:green;
         --color-no-cumple:red;
+        --color-no-editable:#fffacd; /* Amarillo claro */
+        --color-text-no-editable:rgb(2, 37, 51);
  }

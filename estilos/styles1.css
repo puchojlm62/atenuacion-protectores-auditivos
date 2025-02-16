@@ -28,6 +28,7 @@ table {
   border-collapse: collapse;
   text-align: center;
   table-layout: fixed; /* Ancho fijo para las columnas */
+  
 }
 th, td {
   border: 1px solid var(--color-borde);
@@ -334,20 +335,32 @@ nav {
   width: 40%;
   display: flex;
   flex-direction: column;
-  margin-left: 6rem;
+  justify-content: space-between;
+  margin-left: 0rem;
   margin-top: 1rem;
   gap: 1rem;
+  border-radius: 4rem 4rem 0 0;
 }
 .seccion3{
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content:space-between;
+    align-items: center;
     width: 100%;
     height: auto;
     border: 0px solid var(--color-borde);
-    background-color: var(--color-secundario);
+    background-color: transparent;
     padding: 0%;
+    margin-left: 0px;
    
+}
+.titulo-resultado{
+  font-family: Montserrat;
+  font-weight: Bold;
+  font-size: 1.5rem;
+  color: var(--color-texto);
+  padding-bottom: 20px;
+
 }
 .tabla-resultado{
   width: 60%;
@@ -380,7 +393,57 @@ nav {
 .leq-columna{
   width: 20%;
 }
+.real{
+  display: flex;
+  width: 63%;
+  height: 20px;
+  justify-content: center;
+  align-self:center;
+  margin-left: 0px;
+  padding: 0px;
+}
+.checkbox{
+  margin-top: 5px;
+  top: 10px;
+  width: 30%;
+  position: relative;
+}
+label{
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
 
+.indice-group {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 0rem; /* Espacio entre el label y el input */
+  position: relative;
+  margin-top: 3rem;
+  width: 75%;
+}
+.titulo-indice{
+  font-family: Montserrat;
+  font-weight: SemiBold;
+  font-size: 1.25rem;
+  color: var(--color-texto);
+  height:55px ;
+}
+.resultado-indice {
+  opacity: 1;
+  border: 0px solid var(--color-borde);
+  border-radius: 0.9375rem;
+  font-size: 1.15rem;
+  font-family: Montserrat;
+  font-weight: Bold;
+  padding: 0.6rem;
+  width: 13rem;
+  display: flex; /* Convierte el elemento en un contenedor flexible */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 55px; /* Altura fija para el contenedor (ajusta según necesites) */
+  padding: 5px 10px; /* Ajusta el padding para que el texto no toque los bordes */
+}
 
 .seccion4{
   display: flex;
@@ -427,62 +490,147 @@ input {
   background-color: inherit;
 }
 
+
+
+
  /* --- RESPONSIVIDAD --- */
+
  @media (max-width: 768px) {
-
- 
-  /* Cambia a diseño de una sola columna */
-
-    .contenedor-principal {
-      width: 100%;
-      flex-direction: column-reverse;
-      align-items: center;
-      margin-left: 0px;
-
+  /* Ajustes para el header */
+  header {
+    flex-direction: row; /* Header en fila */
+    justify-content: space-between; /* Distribuye el espacio entre elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    height: auto; /* Altura automática */
+    padding: 1rem;
+    flex-wrap: nowrap; /* Evita que los elementos se ajusten a varias líneas */
   }
 
-  .section-title {
-    color: var(--color-titulo-principal);
-    opacity: 100;
-  }
-  .contenedor__izquierda {
-      width: 100%;
-      padding: 0%;
- 
+  .logo {
+    height: 4rem; /* Logo más pequeño */
   }
 
-  .imagen{
- 
-    height: auto; /* La imagen tomará el 100% del header */
-    width: 17.5rem;  /* Mantiene la proporción */
-   
+  h1 {
+    font-size: 1.5rem; /* Título más pequeño */
   }
 
-  /* Oculta el menú normal y muestra la hamburguesa */
+  nav {
+    text-align: right; /* Alinea el menú a la derecha */
+  }
+
+  /* Ajustes para el menú */
   .menu {
-      display: none;
-      flex-direction: column;
-      background-color: var(--color-header-fondo);
-      position: absolute;
-      right: 0;
-      top: 60px;
-      width: 150px;
-      padding: 1rem;
-      border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    background-color: var(--color-header-fondo);
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 150px;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+
+    .menu a {
+    display: block; /* Enlace en bloque */
+    padding: 0.5rem 0;
+    color: var(--color-header-texto); /* Asegurar el color del texto */
+    text-decoration: none; /* Quitar subrayado de enlaces */
   }
 
-  .menu a {
-      display: block;
-      padding: 0.5rem 0;
+  .menu.activo {
+    display: flex; /* Mostrar menú cuando está activo */
   }
 
   .menu-hamburguesa {
-      display: flex;
+    display: flex; /* Mostrar menú hamburguesa */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
   }
 
-  /* Muestra el menú cuando se activa */
-  .menu.activo {
-      display: flex;
+  .menu-hamburguesa div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-header-texto);
+    border-radius: 2px;
   }
+
+  /* Ajustes para el main */
+  .contenedor-principal {
+    width: 100%;
+    flex-direction: column; /* Una sola columna */
+    align-items: center;
+    margin-left: 0;
+    padding: 1rem;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  .contenedor__izquierda {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+  .contenedor__derecha {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+  .seccion1, .seccion2, .seccion3, .seccion4 {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+  .tabla-resultado {
+    width: 100%; /* Tabla ocupa todo el ancho */
+  }
+
+  .input-name {
+    width: 100%; /* Inputs ocupan todo el ancho */
+  }
+
+  .indice-group {
+    width: 100%;
+    flex-direction: column; /* Título e índice en columna */
+    align-items: center;
+  }
+  .titulo-indice{
+    margin-bottom: 1rem;
+  }
+  .resultado-indice{
+    width: 100%;
+  }
+
+  .button-draw {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+    /* Ajustes para la tabla */
+    table {
+      font-size: 0.8rem; /* Tamaño de fuente más pequeño para la tabla */
+    }
+  
+    th, td {
+      padding: 0.3rem; /* Ajustar padding para que quepa el texto */
+    }
+  
+    th:first-child,
+    td:first-child {
+      font-size: 0.9rem; /* Tamaño de fuente un poco más grande para la primera columna */
+    }
+  
+    /* Ajustes para los inputs */
+    input[type="text"]::placeholder {
+      font-size: 0.8rem; /* Tamaño de fuente más pequeño para los placeholders */
+    }
+
+  /* ... otros ajustes para elementos específicos si es necesario ... */
 }
- 
+
+
+

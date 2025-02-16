@@ -19,7 +19,7 @@ function calcularProteccionSupuesta() {
     }
 
     if (!datosCompletos) {
-        alert("Por favor, llene todos los datos excepto la primera columna.");
+        alert("Por favor, llene todos los datos. La columna de la frecuencia 63 Hz es optativa.");
         // Puedes opcionalmente limpiar los campos o enfocarlos para que el usuario los complete.
         return; // Detener la ejecución de la función
     }
@@ -92,6 +92,7 @@ function calcularTodo() {
 
     let lAMedido = calcularEspectro("filaEspectroMedido");
     let lAAtenuado = calcularEspectro("filaEspectroProtegido");
+    let indiceProteccion ="";
 
     console.log("Valores de lA (medido):", lAMedido);
     console.log("Valores de lA (atenuado):", lAAtenuado);
@@ -99,12 +100,43 @@ function calcularTodo() {
     let leqMedido = calcularLeq(lAMedido);
     let leqAtenuado = calcularLeq(lAAtenuado);
 
+    // Obtener el estado del checkbox
+    const checkbox = document.getElementById("cbox2");
+    const sumar4 = checkbox.checked;
+    
+    // Sumar 4 dB si el checkbox está marcado
+    if (sumar4) {
+        leqAtenuado += 4;
+    }
+
     console.log("Leq medido:", leqMedido);
     console.log("Leq atenuado:", leqAtenuado);
 
     // Mostrar resultados en los inputs readonly
     document.querySelector("#filaRuidoMedido .leq-resultado input").value = leqMedido.toFixed(1);
     document.querySelector("#filaRuidoAtenuado .leq-resultado input").value = leqAtenuado.toFixed(1);
+
+    //Determinacion del indice
+    if (leqAtenuado < 70.0) {
+        indiceProteccion = "SOBREPROTEGIDO";
+        document.getElementById("indice-proteccion").style.backgroundColor = "orange"; // Naranja para sobreprotegido
+    } else if (leqAtenuado < 80.0) {
+        indiceProteccion = "BUENA";
+        document.getElementById("indice-proteccion").style.backgroundColor = "lightgreen"; // Verde para buena
+    } else if (leqAtenuado > 85.0) {
+        indiceProteccion = "INSUFICIENTE";
+        document.getElementById("indice-proteccion").style.backgroundColor = "red"; // Rojo para insuficiente
+    } else {
+        indiceProteccion = "ACEPTABLE";
+        document.getElementById("indice-proteccion").style.backgroundColor = "lightyellow"; // Verde claro para aceptable
+    }
+    
+    // El color de la letra se fija en negro para todos los casos
+    document.getElementById("indice-proteccion").style.color = "black";
+    
+    // Expresión del resultado (sin cambios)
+    console.log(indiceProteccion);
+    document.getElementById("indice-proteccion").textContent = indiceProteccion;
 }
 
 function borrarTodo() {
@@ -113,4 +145,16 @@ function borrarTodo() {
       input.value = ''; // Borra el valor de cada input
     });
   }
+
+  // Obtener el checkbox y agregar el evento 'change'
+const checkbox = document.getElementById("cbox2");
+
+checkbox.addEventListener('change', function() {
+    // Verificar si ya existen resultados (puedes ajustar esta condición según tu lógica)
+    const resultadosExisten = document.querySelector("#filaRuidoAtenuado .leq-resultado input").value !== ""; // Ejemplo
+
+    if (resultadosExisten) {
+        calcularTodo(); // Recalcular si ya hay resultados
+    }
+});
 

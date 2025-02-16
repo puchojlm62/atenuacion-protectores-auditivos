@@ -1,0 +1,479 @@
+* /* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html {
+    font-size: 16px; /* 1rem = 16px */
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    background-color: var(--color-body); /* Gris oscuro */
+}
+
+/* Asegurar que el body ocupe toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background-color: var(--color-header-fondo);
+    color:var(--color-header-texto);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    height: 5rem; /* La imagen tomará el 100% del header */
+    max-height: 5rem; /* Asegura que no supere el header */
+    width: auto;  /* Mantiene la proporción */
+    padding-top: 0.5rem;
+  }
+
+/*Título de la aplicación*/
+h1{
+    font-family: Montserrat;
+    font-weight: SemiBold;
+    font-size: 2.1rem;
+}
+
+
+/* Footer fijo en la parte inferior */
+footer {
+    background-color: var(--color-footer-fondo); /* Gris oscuro */
+    color: var(--color-footer-texto);
+    text-align: center;
+    padding: 1%;
+    font-size: 1rem;
+    width: 100%;
+}
+/* estilo iconos en footer */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.94rem;
+  margin-top: 0.625rem;
+}
+
+.social-icons img {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Estilos para el modal */
+    /* Fondo oscuro cuando el modal está activo */
+    .modal {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-semitransparente)
+  }
+
+  /* Contenedor del modal */
+  .modal-content {
+      background-color: var(--color-modal-activo);
+      margin: 15% auto;
+      padding: 1.25rem;
+      width: 50%;
+      border-radius: 0.625rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+      text-align: center;
+      font-size: 1rem;
+  }
+
+  /* Botón de cierre (la "X") */
+  .close {
+      color: var(--color-secundario);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+  .close:hover {
+      color: var(--color-resaltado);
+  }
+
+  /* Estilo para el enlace de "Acerca de" */
+  footer a {
+        color: var(--color-footer-texto);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    footer a:hover {
+        color: var(--color-resaltado);
+    }
+  .text__modal{
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+
+/* Menú de navegación */
+nav {
+  position: relative;
+  z-index: 2; /* El menú estará por encima de la imagen */
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu li {
+  display: inline;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--color-header-texto);
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+p .hiper {
+    text-decoration:underline;
+    color: var(--color-header-fondo);
+    font-size: 1.25rem;
+    transition: color 0.15s ease;
+  
+}
+
+p .hiper:hover {
+    color: var(--color-resaltado);
+  }
+
+/* Cambio de color al pasar el cursor */
+.menu a:hover {
+  color: var(--color-resaltado);
+}
+
+/* Cambio de color al hacer clic */
+.menu a.active {
+  color: var(--color-resaltado);
+}
+
+/* Menú hamburguesa (oculto en pantallas grandes) */
+.menu-hamburguesa {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-hamburguesa div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-header-texto);
+    border-radius: 2px;
+}
+
+/* --- TÍTULOS --- */
+
+.section-title {
+  font-family: "Montserrat", serif;
+  font-size: 1.75rem;
+  color:var(--color-titulo-principal);
+  margin: 1rem 0px;
+  text-align: center;
+}
+
+/* Contenedor principal */
+/* El main debe ocupar todo el espacio disponible */
+.contenedor-principal {
+  background-color: var(--color-secundario);
+  flex: 1; /* Hace que ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  border-radius: 4rem 4rem 0 0;
+  border: 1px solid var(--color-borde);
+  width: 100%;
+  padding-left: 3rem;
+ }
+
+ .contenedor-columnas {
+  display: flex;
+  gap: 25px; /* Espacio entre columnas */
+}
+
+.titulo-info{
+    font-family: "Montserrat", bold;
+    font-size: 1.25rem;
+    color:var(--color-texto);
+    margin: 1rem;
+    text-align:left;
+    padding-bottom: 0rem;
+    width: 100%;
+} 
+.info{
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  color:var(--color-texto);
+  margin: 0px;
+  text-align:left;
+  padding: 0.5rem 0rem 1rem 0rem;
+}
+
+/*Contenedor izquierdo */
+.contenedor__izquierda {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-self: left;
+  margin-left: 0.25rem;
+  margin-top: 1rem;
+  align-self: left;
+}
+.seccion1{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  width: 96%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: var(--color-secundario);
+  padding: 0%;
+ 
+}
+.tabla-info{
+  display: flex;
+  flex-direction: row;
+}
+
+.tabla-db {
+  width: 321px; /* Ancho de la tabla */
+  border-collapse: collapse; /* Colapsar bordes de celdas */
+  margin: 20px auto; /* Centrar la tabla */
+}
+
+.tabla-db th, td {
+  padding: 5px; /* Espaciado interno de celdas */
+  text-align: center; /* Texto centrado */
+  font-size: 12pt; /* Tamaño de fuente */
+}
+
+.tabla-db th {
+  background-color: #6c6c6c; /* Color de fondo de encabezado */
+  color: #ffffff; /* Color de texto de encabezado */
+  font-weight: bold; /* Texto en negrita en encabezado */
+}
+
+.tabla-db tr:nth-child(even) { /* Estilos para filas pares */
+  background-color: #c1c1ef; /* Color de fondo de filas pares */
+}
+
+.contenedor__derecha {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 0rem;
+  margin-top: 1rem;
+  gap: 1rem;
+  border-radius: 4rem 4rem 0 0;
+}
+.seccion3{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  width: 95%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: transparent;
+  padding: 0%;
+  margin-left: 0px;
+ 
+}
+.tabla-indice {
+  width: 100%;
+  border-collapse:separate;
+  border: 1px solid var(--color-borde);
+  margin-bottom: 5px;
+  border-radius: 1rem;
+  overflow: hidden; /* Oculta el desbordamiento */
+}
+
+.tabla-indice td {
+  padding: 10px;
+}
+
+.tabla-indice td:first-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+.tabla-indice td:last-child {
+  text-align: left;
+}
+
+/* Estilos específicos para cada celda */
+.tabla-indice tr:nth-child(2) td:first-child {
+  background-color: orange;
+  color: black;
+}
+
+.tabla-indice tr:nth-child(3) td:first-child {
+  background-color: lightgreen;
+  color: black;
+}
+
+.tabla-indice tr:nth-child(4) td:first-child {
+  background-color: lightyellow;
+  color: black;
+}
+
+.tabla-indice tr:nth-child(5) td:first-child {
+  background-color: red;
+  color: black;
+}
+
+/* Estilos para la segunda columna */
+.tabla-indice td:nth-child(2) {
+  background-color: transparent;
+  color: black;
+}
+
+.tabla-indice-titulo{
+  font-size: 1rem;
+  padding: 0.75rem 0.75rem;
+  border: 0px solid var(--color-borde);
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 768px) {
+  /* Ajustes para el header */
+  header {
+    flex-direction: row; /* Header en fila */
+    justify-content: space-between; /* Distribuye el espacio entre elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    height: auto; /* Altura automática */
+    padding: 1rem;
+    flex-wrap: nowrap; /* Evita que los elementos se ajusten a varias líneas */
+  }
+
+  .logo {
+    height: 4rem; /* Logo más pequeño */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+
+  nav {
+    text-align: right; /* Alinea el menú a la derecha */
+  }
+
+   /* Ajustes para el menú */
+   .menu {
+    display: none;
+    flex-direction: column;
+    background-color: var(--color-header-fondo);
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 150px;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+  .menu a {
+    display: block; /* Enlace en bloque */
+    padding: 0.5rem 0;
+    color: var(--color-header-texto); /* Asegurar el color del texto */
+    text-decoration: none; /* Quitar subrayado de enlaces */
+  }
+
+  .menu.activo {
+    display: flex; /* Mostrar menú cuando está activo */
+  }
+
+  .menu-hamburguesa {
+    display: flex; /* Mostrar menú hamburguesa */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .menu-hamburguesa div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-header-texto);
+    border-radius: 2px;
+  }
+
+  /* Ajustes para el main */
+  .contenedor-principal {
+    width: 100%;
+    flex-direction: column; /* Una sola columna */
+    align-items: center;
+    margin-left: 0;
+    padding: 1rem;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  .contenedor-columnas {
+    flex-direction: column; /* Columnas en vertical */
+    gap: 1rem; /* Espacio entre secciones */
+  }
+
+  .columna {
+    width: 100%; /* Ancho completo para cada sección */
+  }
+
+  .section-title {
+    color: var(--color-titulo-principal);
+    opacity: 100;
+    font-size: 1.5rem; /* Tamaño de fuente más pequeño */
+  }
+
+  .contenedor__izquierda {
+    width: 100%;
+    padding: 0;
+  }
+
+  .titulo-info,
+  .info {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .tabla-db {
+    width: 90%; /* Ancho de la tabla */
+    font-size: 10pt;
+  }
+
+  .tabla-indice {
+    font-size: 0.9rem;
+  }
+
+  .imagen {
+    height: auto;
+    width: 17.5rem;
+  }
+}

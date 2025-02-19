@@ -6,7 +6,7 @@
     <title>Atenuación de protectores auditivos</title>
     <link rel="stylesheet" href="./estilos/colores.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./estilos/styles1.css">
+    <link rel="stylesheet" href="./estilos/styles2.css">
     <script defer src="./scripts/script.js"></script>  
 </head>
 <body>
@@ -34,23 +34,67 @@
     </header>   
     <main>
     <!-- Contenedor principal -->
-    <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR MÉTODO HLM</h2>
+    <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR MÉTODO HML</h2>
     <main class="contenedor-principal">
         <!-- Contenedor izquierdo -->
-        <div class="contenedor__izquierda">
-            <!-- Sección 1 -->
-            <section class="seccion1">Sección 1</section>
-            <!-- Sección 2 -->
-            <section class="seccion2">Sección 2</section>
+         <h3>Aquí va información</h3>
+         <div class="tablas">
+            <div class="contenedor__izquierda">               
+                <div class="input-group">
+                    <p class="titulo-input">Protector auditivo:</p>
+                    <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector">
+                </div>
+                <!-- Sección 1 -->
+                <section class="seccion1">
+                    <h3> Valores HML</h3>
+                    <table>
+                        <tr id="filaH">
+                            <th class="no-editable">H (dB)</th>
+                            <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        </tr>   
+                        <tr id="filaM">
+                            <th class="no-editable">M (dB)</th>
+                            <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        </tr>
+                        <tr id="filaL">
+                            <th class="no-editable">L (dB)</th>
+                            <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+            <div class="contenedor__derecha">
+                <!-- Contenedor derecho -->          
+                    <div class="input-group">
+                        <p class="titulo-input">Ruido del lugar de trabajo:</p>
+                        <input type="text" id="protector-auditivo" class="input-name" placeholder="Lugar/Sector/Equipo">
+                    </div>
+                    <!-- Sección 3 -->
+                    <section class="seccion3">
+                        <h3> Valores medidos</h3>
+                        <table>
+                            <tr id="dbA">
+                                <th class="no-editable">LeqA</th>
+                                <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                            </tr>   
+                            <tr id="dbC">
+                                <th class="no-editable">LeqC</th>
+                                <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                            </tr>
+                        </table>
+                    </section>
+                </div>
         </div>
+        <!-- Sección 4 -->
+        <h3>Aquí van los Resultados</h3>
+        <section class="seccion4">
+            <button class="button-draw" onclick="calcularTodo()">
+                <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
+            </button>
+            <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+        </section>
 
-        <!-- Contenedor derecho -->
-        <div class="contenedor__derecha">
-            <!-- Sección 3 -->
-            <section class="seccion3">Sección 3</section>
-            <!-- Sección 4 -->
-            <section class="seccion4">Sección 4</section>
-        </div>
+                    
     </main>
      <!-- Pie de página -->
      <footer>

@@ -1,3 +1,4 @@
+/*
 * /* Estilos generales */
 * {
     margin: 0;
@@ -597,9 +598,15 @@ input {
     width: 100%;
     flex-direction: column; /* Título e índice en columna */
     align-items: center;
+    justify-content: space-around;
+    margin-top: 5rem;
+    position: relative;
+    
   }
+
   .titulo-indice{
     margin-bottom: 1rem;
+    height: 1.25rem;
   }
   .resultado-indice{
     width: 100%;
@@ -629,8 +636,9 @@ input {
       font-size: 0.8rem; /* Tamaño de fuente más pequeño para los placeholders */
     }
 
-  /* ... otros ajustes para elementos específicos si es necesario ... */
 }
+
+
 
 
 

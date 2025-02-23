@@ -33,6 +33,11 @@ function validarNumeroReal(input) {
     valor = valor.slice(0, puntoIndexFinal + 3);
   }
 
+  // Eliminar números negativos y el cero
+  if (parseFloat(valor) <= 0 || valor == "-" || valor == "-."){
+    valor = "";
+  }
+
   input.value = valor;
 }
 

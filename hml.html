@@ -37,12 +37,18 @@
     <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR MÉTODO HML</h2>
     <main class="contenedor-principal">
         <!-- Contenedor izquierdo -->
-         <h3>Aquí va información</h3>
+         <h3>El método HML de cálculo de la protección auditiva utiliza:</h3>
+
+         <ul >
+            <li class="titulo-info" >Datos H, M y L, dados por el proveedor de protectores auditivos</li>
+            <li class="titulo-info">Niveles de ruido ponderados A (LA o LAeq) y C (LC o LCeq) en el lugar de trabajo</li>
+         </ul>
+
          <div class="tablas">
             <div class="contenedor__izquierda">               
                 <div class="input-group">
                     <p class="titulo-input">Protector auditivo:</p>
-                    <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector">
+                    <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector"><br>
                 </div>
                 <!-- Sección 1 -->
                 <section class="seccion1">
@@ -67,7 +73,7 @@
                 <!-- Contenedor derecho -->          
                     <div class="input-group">
                         <p class="titulo-input">Ruido del lugar de trabajo:</p>
-                        <input type="text" id="protector-auditivo" class="input-name" placeholder="Lugar/Sector/Equipo">
+                        <input type="text" id="ruido" class="input-name" placeholder="Lugar/Sector/Equipo"><br>
                     </div>
                     <!-- Sección 3 -->
                     <section class="seccion3">
@@ -86,12 +92,35 @@
                 </div>
         </div>
         <!-- Sección 4 -->
-        <h3>Aquí van los Resultados</h3>
+        <h3>Resultados</h3>
         <section class="seccion4">
-            <button class="button-draw" onclick="calcularTodo()">
-                <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
-            </button>
-            <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+            <table class="tabla-resultado" >
+                <tr>
+                    <th class="no-editable" ></th>
+                    <th class="leq-columna">LeqA'</th>
+
+                 </tr>
+                <tr id="filaRuidoAtenuadoHML">
+                    <th class="no-editable" >Nivel Ruido atenuado en el oído</th>
+                    <td class="leq-resultado" width="20px" fontsize="22"><input type="text" readonly></td>                
+                </tr>
+            </table>
+            <div  class="real"> 
+                <label for="cbox3">Valor recomendado para el nivel de ruido probable en el oìdo (+4 dbA)</label>
+                <input class= "checkbox" type="checkbox" id="cbox3" value="second_checkbox" />
+            </div>
+            <div class="indice-group">
+                <p class="titulo-indice">Índice de protección:</p>
+                <p id="indice-proteccionHML" class="resultado-indice">
+            </div>          
+            <div class="botones">
+                <button class="button-draw" onclick="calcularTodoHML()">
+                    <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
+                </button>
+                <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+            </div>
+                
+        </div>
         </section>
 
                     
@@ -123,7 +152,7 @@
             </p>
         </div>
     </div>
-   <!--  <script src="./scripts/app.js"></script> -->
+   <script src="./scripts/apphml.js"></script>
 
 </body>
 </html>

@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./estilos/styles1.css">
     <script defer src="./scripts/script.js"></script>  
+    <script src="./lib/jszip.min.js"></script>
+    <script src="./lib/docxtemplater.min.js"></script>
+    <script src="./lib/FileSaver.min.js"></script>
 </head>
 <body>
      
@@ -175,6 +178,7 @@
                     <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
                 </button>
                 <button class="button-draw" onclick="borrarTodoBo()">Borrar Todo</button>
+                <button class="button-draw" id="boton-informeBo" onclick="informeBo()">Generar Informe</button>
             </section>
         </div>
     </main>

@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="./estilos/colores.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./estilos/styles2.css">
-    <script defer src="./scripts/script.js"></script>  
+    <script defer src="./scripts/script.js"></script> 
+    <script src="./lib/jszip.min.js"></script>
+    <script src="./lib/docxtemplater.min.js"></script>
+    <script src="./lib/FileSaver.min.js"></script>
+    
 </head>
-<body>
-     
+<body>  
     <!-- Encabezado con Menú -->
     <header>
         <a href="https://isp65-sfe.infd.edu.ar/sitio/" target="_blank">
@@ -114,10 +117,11 @@
                 <p id="indice-proteccionHML" class="resultado-indice">
             </div>          
             <div class="botones">
-                <button class="button-draw" onclick="calcularTodoHML()">
-                    <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
-                </button>
-                <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+                 <button class="button-draw" onclick="calcularTodoHML()">
+                     <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
+                 </button>
+                 <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+                 <button class="button-draw" id="boton-informe" onclick="informe()">Generar Informe</button>
             </div>
                 
         </div>
@@ -152,7 +156,7 @@
             </p>
         </div>
     </div>
-   <script src="./scripts/apphml.js"></script>
+    <script src="./scripts/apphml.js"></script>
 
 </body>
 </html>

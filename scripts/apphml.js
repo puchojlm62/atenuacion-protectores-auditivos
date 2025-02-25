@@ -1,3 +1,5 @@
+
+
 // apphml.js
 
 function calcularTodoHML() {
@@ -48,8 +50,8 @@ function calcularTodoHML() {
     document.getElementById("indice-proteccionHML").textContent = indiceProteccion;
     document.getElementById("indice-proteccionHML").style.backgroundColor = indiceProteccionColor;
 
-    // Guardar the results of the calculation.
-     sessionStorage.setItem("dbA_protegido", dbA_protegido_fixed);
+    // Guardar los resultados del cálculo.
+    sessionStorage.setItem("dbA_protegido", dbA_protegido_fixed);
     sessionStorage.setItem("indiceProteccion", indiceProteccion);
     sessionStorage.setItem("indiceProteccionColor", indiceProteccionColor);
 }
@@ -80,11 +82,11 @@ function borrarTodo() {
 const checkbox = document.getElementById("cbox3");
 
 checkbox.addEventListener('change', function () {
-        calcularTodoHML();
-     saveAllData();
+    calcularTodoHML();
+    saveAllData();
 });
 
-// Function to save input data to sessionStorage (excluding results)
+// Guardar los datos en sessionStorage
 function saveAllData() {
     sessionStorage.setItem("protectorAuditivo", document.getElementById("protector-auditivo").value);
     sessionStorage.setItem("H", document.querySelector("#filaH input").value);
@@ -96,7 +98,7 @@ function saveAllData() {
     sessionStorage.setItem("cbox3", document.querySelector("#cbox3").checked);
 }
 
-// Add event listeners to input elements to save data on change
+// Agregar event listeners a los inputs
 document.getElementById("protector-auditivo").addEventListener("input", saveAllData);
 document.querySelector("#filaH input").addEventListener("input", saveAllData);
 document.querySelector("#filaM input").addEventListener("input", saveAllData);
@@ -105,7 +107,7 @@ document.getElementById("ruido").addEventListener("input", saveAllData);
 document.querySelector("#dbA input").addEventListener("input", saveAllData);
 document.querySelector("#dbC input").addEventListener("input", saveAllData);
 
-// Load values from sessionStorage on page load
+// Cargar los valores de sessionStorage al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("protector-auditivo").value = sessionStorage.getItem("protectorAuditivo") || "";
     document.querySelector("#filaH input").value = sessionStorage.getItem("H") || "";
@@ -116,9 +118,53 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#dbC input").value = sessionStorage.getItem("dbC") || "";
     document.getElementById("cbox3").checked = sessionStorage.getItem("cbox3") === "true";
 
-    // Load calculated results
     document.querySelector("#filaRuidoAtenuadoHML input").value = sessionStorage.getItem("dbA_protegido") || "";
     document.getElementById("indice-proteccionHML").textContent = sessionStorage.getItem("indiceProteccion") || "";
-    const storedColor = sessionStorage.getItem("indiceProteccionColor");
-    document.getElementById("indice-proteccionHML").style.backgroundColor = storedColor || "transparent";
+    document.getElementById("indice-proteccionHML").style.backgroundColor = sessionStorage.getItem("indiceProteccionColor") || "transparent";
 });
+
+// Función para generar el informe en Word
+function informe() {
+    fetch("./plantillas/Informe_atenuaHLM.docx") // Asegúrate de que la ruta a tu plantilla sea correcta
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            let zip; // Declaramos zip fuera del try
+
+            try {
+                zip = new JSZip(data); // **Usamos 'new JSZip(data)' (sin Async)**
+            } catch (error) {
+                console.error("Error al cargar el ZIP con JSZip:", error);
+                alert("Error al procesar la plantilla Word (JSZip).");
+                return; // Importante: Salir de la función si hay error al cargar el ZIP
+            }
+
+            let doc = new window.docxtemplater().loadZip(zip);
+
+            let valores = {
+                leqAo: sessionStorage.getItem("dbA_protegido") || "",
+                H: sessionStorage.getItem("H") || "",
+                M: sessionStorage.getItem("M") || "",
+                L: sessionStorage.getItem("L") || "",
+                leqC: sessionStorage.getItem("dbC") || "",
+                leqA: sessionStorage.getItem("dbA") || "",
+                indice: sessionStorage.getItem("indiceProteccion") || "",
+                pa: sessionStorage.getItem("protectorAuditivo") || "",
+                sph: sessionStorage.getItem("lugarRuido") || ""
+            };
+
+            doc.setData(valores);
+
+            try {
+                doc.render();
+                let out = doc.getZip().generate({ type: "blob" });
+                saveAs(out, "Informe_HML.docx");
+            } catch (error) {
+                console.error("Error generando el documento:", error);
+                alert("Hubo un error al generar el informe.");
+            }
+        })
+        .catch(error => {
+            console.error("Error cargando la plantilla:", error);
+            alert("No se pudo cargar la plantilla del informe.");
+        });
+}

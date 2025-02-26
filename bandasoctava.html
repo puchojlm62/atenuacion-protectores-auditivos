@@ -7,13 +7,73 @@
     <link rel="stylesheet" href="./estilos/colores.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./estilos/styles1.css">
-    <script defer src="./scripts/script.js"></script>  
+    <script defer src="./scripts/script.js"></script>
     <script src="./lib/jszip.min.js"></script>
     <script src="./lib/docxtemplater.min.js"></script>
     <script src="./lib/FileSaver.min.js"></script>
+    <style> /* Estilos CSS para el Modal y las opciones de plantilla */
+        /* Estilos para el modal (general - puedes tenerlos en tu archivo CSS si prefieres) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            position: relative; /* Para posicionar el botón de cerrar */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute; /* Posicionamiento absoluto dentro de .modal-content */
+            top: 10px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilos para las opciones de plantilla (ya tenías algunos, los mantengo aquí) */
+        .plantilla-opciones {
+            margin-bottom: 15px;
+        }
+        .plantilla-opciones label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .modal-botones {
+            text-align: right; /* Alinea los botones a la derecha del modal */
+            margin-top: 20px;
+        }
+        .modal-botones button {
+            margin-left: 10px; /* Espacio entre botones en el modal */
+        }
+
+    </style>
 </head>
 <body>
-     
+
     <!-- Encabezado con Menú -->
     <header>
         <a href="https://isp65-sfe.infd.edu.ar/sitio/" target="_blank">
@@ -34,13 +94,13 @@
                 <div></div>
             </div>
         </nav>
-    </header>   
+    </header>
     <main>
     <!-- Contenedor principal -->
     <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR BANDA DE OCTAVA</h2>
     <main class="contenedor-principal">
         <!-- Contenedor izquierdo -->
-         
+
         <div class="contenedor__izquierda">
             <!-- Sección 1 -->
             <div class="input-group">
@@ -48,7 +108,7 @@
                 <input type="text" id="nombre-protector" class="input-name" placeholder="Nombre y modelo del protector">
             </div>
             <section class="seccion1">
-  
+
                 <table>
                     <tr>
                         <th class="no-editable">Frecuencia (Hz)</th>
@@ -96,12 +156,12 @@
                     </tr>
                 </table>
              </section>
-            
+
             <div class="input-group">
                 <p class="titulo-input">Ruido del lugar de trabajo:</p>
                 <input type="text" id="lugar-ruido" class="input-name" placeholder="Lugar/Sector/Equipo">
             </div>
-            <section class="seccion2"> 
+            <section class="seccion2">
                  <table>
                     <tr>
                         <th class="no-editable">Frecuencia (Hz)</th>
@@ -125,7 +185,7 @@
                         <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
                         <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
                     </tr>
- 
+
                     <tr id="filaEspectroProtegido">
                         <th class="no-editable">Espectro protegido (dB)</th>
                         <td class="no-editable-resultado"><input type="text" readonly></td>
@@ -138,8 +198,8 @@
                         <td class="no-editable-resultado"><input type="text" readonly></td>
                     </tr>
                 </table>
- 
- 
+
+
             </section>
         </div>
 
@@ -153,17 +213,17 @@
                         <th class="no-editable" ></th>
                         <th class="leq-columna">LeqA</th>
 
-                    
+
                     <tr id="filaRuidoMedido">
                         <th class="no-editable" >Nivel Ruido medido</th>
                         <td class="leq-resultado"><input type="text" readonly></td>
                     </tr>
                     <tr id="filaRuidoAtenuado">
                         <th class="no-editable" >Nivel Ruido atenuado en el oìdo</th>
-                        <td class="leq-resultado" fontsize="22"><input type="text" readonly></td>                
+                        <td class="leq-resultado" fontsize="22"><input type="text" readonly></td>
                     </tr>
                 </table>
-                <div  class="real"> 
+                <div  class="real">
                     <label for="cbox2">Valor recomendado para el nivel de ruido probable en el oìdo (+4 dbA)</label>
                     <input class= "checkbox" type="checkbox" id="cbox2" value="second_checkbox" />
                 </div>
@@ -178,7 +238,27 @@
                     <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
                 </button>
                 <button class="button-draw" onclick="borrarTodoBo()">Borrar Todo</button>
-                <button class="button-draw" id="boton-informeBo" onclick="informeBo()">Generar Informe</button>
+                <button class="button-draw" id="boton-informeBo" onclick="abrirModalPlantilla()">Generar Informe</button>
+                <div id="modalPlantilla" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="cerrarModalPlantilla">×</span>
+                        <h2>Generar Informe</h2>
+                        <div class="plantilla-opciones">
+                            <p class="titulo-opciones">Seleccionar Plantilla:</p>
+                            <label>
+                                <input type="radio" name="plantillaModalSeleccion" value="default" checked> Usar Plantilla Predeterminada
+                            </label>
+                            <label>
+                                <input type="radio" name="plantillaModalSeleccion" value="subir"> Subir mi Plantilla (.docx):
+                            </label>
+                            <input type="file" id="plantillaModalUpload" accept=".docx" style="display: none;">
+                        </div>
+                        <div class="modal-botones">
+                            <button class="button-draw" id="boton-generarInformeModal">Generar Informe</button>
+                            <button class="button-draw" id="boton-cancelarInformeModal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -198,9 +278,9 @@
     <!-- Modal de "Acerca de" -->
     <div id="modalAcerca" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>Acerca de</h2>
-            <p class="text__modal">Esta es una aplicación web de código abierto bajo la 
+            <p class="text__modal">Esta es una aplicación web de código abierto bajo la
                 <a href="LICENSE.html" target="_blank">licencia MIT.</a>
             </p>
             <p class="text__modal">Desarrollado por: Ing. Jorge Mendoza</p>
@@ -209,8 +289,8 @@
             </p>
         </div>
     </div>
+    <script src="./scripts/bandasoctava.js"></script>
     <script src="./scripts/app.js"></script>
 
 </body>
 </html>
-

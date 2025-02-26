@@ -7,13 +7,72 @@
     <link rel="stylesheet" href="./estilos/colores.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./estilos/styles2.css">
-    <script defer src="./scripts/script.js"></script> 
+    <script defer src="./scripts/script.js"></script>
     <script src="./lib/jszip.min.js"></script>
     <script src="./lib/docxtemplater.min.js"></script>
     <script src="./lib/FileSaver.min.js"></script>
-    
+    <style> /* Estilos CSS para el Modal y las opciones de plantilla */
+        /* Estilos para el modal (general - puedes tenerlos en tu archivo CSS si prefieres) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            position: relative; /* Para posicionar el botón de cerrar */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute; /* Posicionamiento absoluto dentro de .modal-content */
+            top: 10px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilos para las opciones de plantilla (ya tenías algunos, los mantengo aquí) */
+        .plantilla-opciones {
+            margin-bottom: 15px;
+        }
+        .plantilla-opciones label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .modal-botones {
+            text-align: right; /* Alinea los botones a la derecha del modal */
+            margin-top: 20px;
+        }
+        .modal-botones button {
+            margin-left: 10px; /* Espacio entre botones en el modal */
+        }
+
+    </style>
 </head>
-<body>  
+<body>
     <!-- Encabezado con Menú -->
     <header>
         <a href="https://isp65-sfe.infd.edu.ar/sitio/" target="_blank">
@@ -34,7 +93,7 @@
                 <div></div>
             </div>
         </nav>
-    </header>   
+    </header>
     <main>
     <!-- Contenedor principal -->
     <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR MÉTODO HML</h2>
@@ -48,7 +107,7 @@
          </ul>
 
          <div class="tablas">
-            <div class="contenedor__izquierda">               
+            <div class="contenedor__izquierda">
                 <div class="input-group">
                     <p class="titulo-input">Protector auditivo:</p>
                     <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector"><br>
@@ -60,7 +119,7 @@
                         <tr id="filaH">
                             <th class="no-editable">H (dB)</th>
                             <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
-                        </tr>   
+                        </tr>
                         <tr id="filaM">
                             <th class="no-editable">M (dB)</th>
                             <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
@@ -73,7 +132,7 @@
                 </section>
             </div>
             <div class="contenedor__derecha">
-                <!-- Contenedor derecho -->          
+                <!-- Contenedor derecho -->
                     <div class="input-group">
                         <p class="titulo-input">Ruido del lugar de trabajo:</p>
                         <input type="text" id="ruido" class="input-name" placeholder="Lugar/Sector/Equipo"><br>
@@ -85,7 +144,7 @@
                             <tr id="dbA">
                                 <th class="no-editable">LeqA</th>
                                 <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
-                            </tr>   
+                            </tr>
                             <tr id="dbC">
                                 <th class="no-editable">LeqC</th>
                                 <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
@@ -105,29 +164,49 @@
                  </tr>
                 <tr id="filaRuidoAtenuadoHML">
                     <th class="no-editable" >Nivel Ruido atenuado en el oído</th>
-                    <td class="leq-resultado" width="20px" fontsize="22"><input type="text" readonly></td>                
+                    <td class="leq-resultado" width="20px" fontsize="22"><input type="text" readonly></td>
                 </tr>
             </table>
-            <div  class="real"> 
+            <div  class="real">
                 <label for="cbox3">Valor recomendado para el nivel de ruido probable en el oìdo (+4 dbA)</label>
                 <input class= "checkbox" type="checkbox" id="cbox3" value="second_checkbox" />
             </div>
             <div class="indice-group">
                 <p class="titulo-indice">Índice de protección:</p>
                 <p id="indice-proteccionHML" class="resultado-indice">
-            </div>          
+            </div>
             <div class="botones">
                  <button class="button-draw" onclick="calcularTodoHML()">
                      <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
                  </button>
                  <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
-                 <button class="button-draw" id="boton-informe" onclick="informe()">Generar Informe</button>
+                 <button class="button-draw" id="boton-informe" onclick="abrirModalPlantillaHML()">Generar Informe</button>
+                 <div id="modalPlantillaHML" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="cerrarModalPlantillaHML">×</span>
+                        <h2>Generar Informe</h2>
+                        <div class="plantilla-opciones">
+                            <p class="titulo-opciones">Seleccionar Plantilla:</p>
+                            <label>
+                                <input type="radio" name="plantillaModalSeleccionHML" value="default" checked> Usar Plantilla Predeterminada
+                            </label>
+                            <label>
+                                <input type="radio" name="plantillaModalSeleccionHML" value="subir"> Subir mi Plantilla (.docx o .dotx):
+                            </label>
+                            <input type="file" id="plantillaModalUploadHML" accept=".docx,.dotx" style="display: none;">
+                        </div>
+                        <div class="modal-botones">
+                            <button class="button-draw" id="boton-generarInformeModalHML">Generar Informe</button>
+                            <button class="button-draw" id="boton-cancelarInformeModalHML">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-                
+
         </div>
         </section>
 
-                    
+
     </main>
      <!-- Pie de página -->
      <footer>
@@ -145,9 +224,9 @@
     <!-- Modal de "Acerca de" -->
     <div id="modalAcerca" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>Acerca de</h2>
-            <p class="text__modal">Esta es una aplicación web de código abierto bajo la 
+            <p class="text__modal">Esta es una aplicación web de código abierto bajo la
                 <a href="LICENSE.html" target="_blank">licencia MIT.</a>
             </p>
             <p class="text__modal">Desarrollado por: Ing. Jorge Mendoza</p>
@@ -156,8 +235,8 @@
             </p>
         </div>
     </div>
+    <script src="./scripts/hml.js"></script>
     <script src="./scripts/apphml.js"></script>
 
 </body>
 </html>
-

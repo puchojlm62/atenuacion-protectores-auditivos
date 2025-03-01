@@ -74,15 +74,15 @@ function generarInformeDesdeModalHML() {
         let doc = new window.docxtemplater().loadZip(zip);
 
         let valores = {
-            leqAo: sessionStorage.getItem("dbA_protegido") || "",
-            H: sessionStorage.getItem("H") || "",
-            M: sessionStorage.getItem("M") || "",
-            L: sessionStorage.getItem("L") || "",
-            leqC: sessionStorage.getItem("dbC") || "",
-            leqA: sessionStorage.getItem("dbA") || "",
-            indice: sessionStorage.getItem("indiceProteccion") || "",
-            pa: sessionStorage.getItem("protectorAuditivo") || "",
-            sph: sessionStorage.getItem("lugarRuido") || ""
+            leqAo: sessionStorage.getItem("hml_dbA_protegido") || "", // Clave sessionStorage CORRECTA: hml_dbA_protegido
+            H: sessionStorage.getItem("hml_H") || "",             // Clave sessionStorage CORRECTA: hml_H
+            M: sessionStorage.getItem("hml_M") || "",             // Clave sessionStorage CORRECTA: hml_M
+            L: sessionStorage.getItem("hml_L") || "",             // Clave sessionStorage CORRECTA: hml_L
+            leqC: sessionStorage.getItem("hml_dbC") || "",          // Clave sessionStorage CORRECTA: hml_dbC
+            leqA: sessionStorage.getItem("hml_dbA") || "",          // Clave sessionStorage CORRECTA: hml_dbA
+            indice: sessionStorage.getItem("hml_indiceProteccion") || "", // Clave sessionStorage CORRECTA: hml_indiceProteccion
+            pa: sessionStorage.getItem("hml_protectorAuditivo") || "",    // Clave sessionStorage CORRECTA: hml_protectorAuditivo
+            sph: sessionStorage.getItem("hml_lugarRuido") || ""         // Clave sessionStorage CORRECTA: hml_lugarRuido
         };
 
         doc.setData(valores);

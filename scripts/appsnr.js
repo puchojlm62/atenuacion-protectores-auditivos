@@ -1,6 +1,7 @@
 function calcularTodoSNR() {
-    let dbC = parseFloat(document.querySelector("#dbC input").value) || null;
+    let dbC = parseFloat(document.querySelector("#dbC_snr input").value) || null; 
     let SNR = parseFloat(document.querySelector("#filaSNR input").value) || null;
+
 
     if ([dbC, SNR].includes(null)) {
         alert("Por favor, ingrese todos los valores antes de calcular.");
@@ -38,12 +39,12 @@ function calcularTodoSNR() {
     document.getElementById("indice-proteccionSNR").style.backgroundColor = indiceProteccionColor;
 
     // Guardar los resultados del cálculo.
-    sessionStorage.setItem("dbA_protegido", dbA_protegido_fixed);
-    sessionStorage.setItem("indiceProteccion", indiceProteccion);
-    sessionStorage.setItem("indiceProteccionColor", indiceProteccionColor);
+    sessionStorage.setItem("snr_dbA_protegido", dbA_protegido_fixed); // Clave sessionStorage específica de SNR
+    sessionStorage.setItem("snr_indiceProteccion", indiceProteccion); // Clave sessionStorage específica de SNR
+    sessionStorage.setItem("snr_indiceProteccionColor", indiceProteccionColor); // Clave sessionStorage específica de SNR
 }
 
-function borrarTodoSNR() { // Renamed to borrarTodoSNR()
+function borrarTodoSNR() {
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
         input.value = '';
@@ -52,49 +53,49 @@ function borrarTodoSNR() { // Renamed to borrarTodoSNR()
     document.getElementById("indice-proteccionSNR").textContent = "";
     document.getElementById("indice-proteccionSNR").style.backgroundColor = "transparent";
 
-    // Limpiar sessionStorage
-    sessionStorage.removeItem("protectorAuditivo");
-    sessionStorage.removeItem("SNR");
-    sessionStorage.removeItem("lugarRuido");
-    sessionStorage.removeItem("dbC");
-    sessionStorage.removeItem("cbox3");
-    sessionStorage.removeItem("dbA_protegido");
-    sessionStorage.removeItem("indiceProteccion");
-    sessionStorage.removeItem("indiceProteccionColor"); // Remove the color
+    // Limpiar sessionStorage (claves sessionStorage específicas de SNR)
+    sessionStorage.removeItem("snr_protectorAuditivo");
+    sessionStorage.removeItem("snr_SNR");
+    sessionStorage.removeItem("snr_lugarRuido");
+    sessionStorage.removeItem("snr_dbC");
+    sessionStorage.removeItem("snr_cbox3");
+    sessionStorage.removeItem("snr_dbA_protegido");
+    sessionStorage.removeItem("snr_indiceProteccion");
+    sessionStorage.removeItem("snr_indiceProteccionColor"); // Remove the color
 }
 
 const checkbox = document.getElementById("cbox3");
 
 checkbox.addEventListener('change', function () {
-    calcularTodoSNR(); // Correct function name
-    saveAllData();
+    calcularTodoSNR();
+    saveAllDataSNR(); // Usar saveAllDataSNR() para guardar con claves específicas de SNR
 });
 
 
-// Guardar los datos en sessionStorage
-function saveAllData() {
-    sessionStorage.setItem("protectorAuditivo", document.getElementById("protector-auditivo").value);
-    sessionStorage.setItem("SNR", document.querySelector("#filaSNR input").value);
-    sessionStorage.setItem("lugarRuido", document.getElementById("ruido").value);
-    sessionStorage.setItem("dbC", document.querySelector("#dbC input").value);
-    sessionStorage.setItem("cbox3", document.querySelector("#cbox3").checked);
+// Guardar los datos en sessionStorage (claves sessionStorage específicas de SNR)
+function saveAllDataSNR() {
+    sessionStorage.setItem("snr_protectorAuditivo", document.getElementById("protector-auditivo").value); // Clave sessionStorage específica de SNR
+    sessionStorage.setItem("snr_SNR", document.querySelector("#filaSNR input").value); // Clave sessionStorage específica de SNR
+    sessionStorage.setItem("snr_lugarRuido", document.getElementById("ruido").value); // Clave sessionStorage específica de SNR
+    sessionStorage.setItem("snr_dbC", document.querySelector("#dbC_snr input").value); // Clave sessionStorage específica de SNR - ID CORREGIDO: dbC_snr
+    sessionStorage.setItem("snr_cbox3", document.querySelector("#cbox3").checked); // Clave sessionStorage específica de SNR
 }
 
 // Agregar event listeners a los inputs
-document.getElementById("protector-auditivo").addEventListener("input", saveAllData);
-document.querySelector("#filaSNR input").addEventListener("input", saveAllData);
-document.getElementById("ruido").addEventListener("input", saveAllData);
-document.querySelector("#dbC input").addEventListener("input", saveAllData);
+document.getElementById("protector-auditivo").addEventListener("input", saveAllDataSNR); // Usar saveAllDataSNR()
+document.querySelector("#filaSNR input").addEventListener("input", saveAllDataSNR); // Usar saveAllDataSNR()
+document.getElementById("ruido").addEventListener("input", saveAllDataSNR); // Usar saveAllDataSNR()
+document.querySelector("#dbC_snr input").addEventListener("input", saveAllDataSNR); // Usar saveAllDataSNR() - ID CORREGIDO: dbC_snr
 
 // Cargar los valores de sessionStorage al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("protector-auditivo").value = sessionStorage.getItem("protectorAuditivo") || "";
-    document.querySelector("#filaSNR input").value = sessionStorage.getItem("SNR") || "";
-    document.getElementById("ruido").value = sessionStorage.getItem("lugarRuido") || "";
-    document.querySelector("#dbC input").value = sessionStorage.getItem("dbC") || "";
-    document.getElementById("cbox3").checked = sessionStorage.getItem("cbox3") === "true";
+    document.getElementById("protector-auditivo").value = sessionStorage.getItem("snr_protectorAuditivo") || ""; // Clave sessionStorage específica de SNR
+    document.querySelector("#filaSNR input").value = sessionStorage.getItem("snr_SNR") || ""; // Clave sessionStorage específica de SNR
+    document.getElementById("ruido").value = sessionStorage.getItem("snr_lugarRuido") || ""; // Clave sessionStorage específica de SNR
+    document.querySelector("#dbC_snr input").value = sessionStorage.getItem("snr_dbC") || ""; // Clave sessionStorage específica de SNR - ID CORREGIDO: dbC_snr
+    document.getElementById("cbox3").checked = sessionStorage.getItem("snr_cbox3") === "true"; // Clave sessionStorage específica de SNR
 
-    document.querySelector("#filaRuidoAtenuadoSNR input").value = sessionStorage.getItem("dbA_protegido") || "";
-    document.getElementById("indice-proteccionSNR").textContent = sessionStorage.getItem("indiceProteccion") || "";
-    document.getElementById("indice-proteccionSNR").style.backgroundColor = sessionStorage.getItem("indiceProteccionColor") || "transparent";
+    document.querySelector("#filaRuidoAtenuadoSNR input").value = sessionStorage.getItem("snr_dbA_protegido") || ""; // Clave sessionStorage específica de SNR
+    document.getElementById("indice-proteccionSNR").textContent = sessionStorage.getItem("snr_indiceProteccion") || ""; // Clave sessionStorage específica de SNR
+    document.getElementById("indice-proteccionSNR").style.backgroundColor = sessionStorage.getItem("snr_indiceProteccionColor") || "transparent"; // Clave sessionStorage específica de SNR
 });

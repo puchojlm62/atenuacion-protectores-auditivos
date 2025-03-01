@@ -74,12 +74,12 @@ function generarInformeDesdeModalSNR() {
         let doc = new window.docxtemplater().loadZip(zip);
 
         let valores = {
-            leqAo: sessionStorage.getItem("dbA_protegido") || "",
-            SNR: sessionStorage.getItem("SNR") || "",
-            leqC: sessionStorage.getItem("dbC") || "",
-             indice: sessionStorage.getItem("indiceProteccion") || "",
-            pa: sessionStorage.getItem("protectorAuditivo") || "",
-            sph: sessionStorage.getItem("lugarRuido") || ""
+            leqAo: sessionStorage.getItem("snr_dbA_protegido") || "", // Clave sessionStorage CORRECTA: snr_dbA_protegido
+            SNR: sessionStorage.getItem("snr_SNR") || "",             // Clave sessionStorage CORRECTA: snr_SNR
+            leqC: sessionStorage.getItem("snr_dbC") || "",              // Clave sessionStorage CORRECTA: snr_dbC
+             indice: sessionStorage.getItem("snr_indiceProteccion") || "", // Clave sessionStorage CORRECTA: snr_indiceProteccion
+            pa: sessionStorage.getItem("snr_protectorAuditivo") || "",    // Clave sessionStorage CORRECTA: snr_protectorAuditivo
+            sph: sessionStorage.getItem("snr_lugarRuido") || ""         // Clave sessionStorage CORRECTA: snr_lugarRuido
         };
 
         doc.setData(valores);

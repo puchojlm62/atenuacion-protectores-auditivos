@@ -1,7 +1,3 @@
-
-
-// apphml.js
-
 function calcularTodoHML() {
     let dbA = parseFloat(document.querySelector("#dbA input").value) || null;
     let dbC = parseFloat(document.querySelector("#dbC input").value) || null;
@@ -51,12 +47,12 @@ function calcularTodoHML() {
     document.getElementById("indice-proteccionHML").style.backgroundColor = indiceProteccionColor;
 
     // Guardar los resultados del cálculo.
-    sessionStorage.setItem("dbA_protegido", dbA_protegido_fixed);
-    sessionStorage.setItem("indiceProteccion", indiceProteccion);
-    sessionStorage.setItem("indiceProteccionColor", indiceProteccionColor);
+    sessionStorage.setItem("hml_dbA_protegido", dbA_protegido_fixed); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_indiceProteccion", indiceProteccion); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_indiceProteccionColor", indiceProteccionColor); // Clave sessionStorage específica de HML
 }
 
-function borrarTodo() {
+function borrarTodoHML() { // Renombrado a borrarTodoHML()
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
         input.value = '';
@@ -65,61 +61,60 @@ function borrarTodo() {
     document.getElementById("indice-proteccionHML").textContent = "";
     document.getElementById("indice-proteccionHML").style.backgroundColor = "transparent";
 
-    // Limpiar sessionStorage
-    sessionStorage.removeItem("protectorAuditivo");
-    sessionStorage.removeItem("H");
-    sessionStorage.removeItem("M");
-    sessionStorage.removeItem("L");
-    sessionStorage.removeItem("lugarRuido");
-    sessionStorage.removeItem("dbA");
-    sessionStorage.removeItem("dbC");
-    sessionStorage.removeItem("cbox3");
-    sessionStorage.removeItem("dbA_protegido");
-    sessionStorage.removeItem("indiceProteccion");
-    sessionStorage.removeItem("indiceProteccionColor"); // Remove the color
+    // Limpiar sessionStorage (claves sessionStorage específicas de HML)
+    sessionStorage.removeItem("hml_protectorAuditivo");
+    sessionStorage.removeItem("hml_H");
+    sessionStorage.removeItem("hml_M");
+    sessionStorage.removeItem("hml_L");
+    sessionStorage.removeItem("hml_lugarRuido");
+    sessionStorage.removeItem("hml_dbA");
+    sessionStorage.removeItem("hml_dbC");
+    sessionStorage.removeItem("hml_cbox3");
+    sessionStorage.removeItem("hml_dbA_protegido");
+    sessionStorage.removeItem("hml_indiceProteccion");
+    sessionStorage.removeItem("hml_indiceProteccionColor"); // Remove the color
 }
 
 const checkbox = document.getElementById("cbox3");
 
 checkbox.addEventListener('change', function () {
     calcularTodoHML();
-    saveAllData();
+    saveAllDataHML(); // Usar saveAllDataHML() para guardar con claves específicas de HML
 });
 
-// Guardar los datos en sessionStorage
-function saveAllData() {
-    sessionStorage.setItem("protectorAuditivo", document.getElementById("protector-auditivo").value);
-    sessionStorage.setItem("H", document.querySelector("#filaH input").value);
-    sessionStorage.setItem("M", document.querySelector("#filaM input").value);
-    sessionStorage.setItem("L", document.querySelector("#filaL input").value);
-    sessionStorage.setItem("lugarRuido", document.getElementById("ruido").value);
-    sessionStorage.setItem("dbA", document.querySelector("#dbA input").value);
-    sessionStorage.setItem("dbC", document.querySelector("#dbC input").value);
-    sessionStorage.setItem("cbox3", document.querySelector("#cbox3").checked);
+// Guardar los datos en sessionStorage (claves sessionStorage específicas de HML)
+function saveAllDataHML() {
+    sessionStorage.setItem("hml_protectorAuditivo", document.getElementById("protector-auditivo").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_H", document.querySelector("#filaH input").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_M", document.querySelector("#filaM input").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_L", document.querySelector("#filaL input").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_lugarRuido", document.getElementById("ruido").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_dbC", document.querySelector("#dbC input").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_dbA", document.querySelector("#dbA input").value); // Clave sessionStorage específica de HML
+    sessionStorage.setItem("hml_cbox3", document.querySelector("#cbox3").checked); // Clave sessionStorage específica de HML
 }
 
 // Agregar event listeners a los inputs
-document.getElementById("protector-auditivo").addEventListener("input", saveAllData);
-document.querySelector("#filaH input").addEventListener("input", saveAllData);
-document.querySelector("#filaM input").addEventListener("input", saveAllData);
-document.querySelector("#filaL input").addEventListener("input", saveAllData);
-document.getElementById("ruido").addEventListener("input", saveAllData);
-document.querySelector("#dbA input").addEventListener("input", saveAllData);
-document.querySelector("#dbC input").addEventListener("input", saveAllData);
+document.getElementById("protector-auditivo").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.querySelector("#filaH input").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.querySelector("#filaM input").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.querySelector("#filaL input").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.getElementById("ruido").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.querySelector("#dbA input").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
+document.querySelector("#dbC input").addEventListener("input", saveAllDataHML); // Usar saveAllDataHML()
 
 // Cargar los valores de sessionStorage al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("protector-auditivo").value = sessionStorage.getItem("protectorAuditivo") || "";
-    document.querySelector("#filaH input").value = sessionStorage.getItem("H") || "";
-    document.querySelector("#filaM input").value = sessionStorage.getItem("M") || "";
-    document.querySelector("#filaL input").value = sessionStorage.getItem("L") || "";
-    document.getElementById("ruido").value = sessionStorage.getItem("lugarRuido") || "";
-    document.querySelector("#dbA input").value = sessionStorage.getItem("dbA") || "";
-    document.querySelector("#dbC input").value = sessionStorage.getItem("dbC") || "";
-    document.getElementById("cbox3").checked = sessionStorage.getItem("cbox3") === "true";
+    document.getElementById("protector-auditivo").value = sessionStorage.getItem("hml_protectorAuditivo") || ""; // Clave sessionStorage específica de HML
+    document.querySelector("#filaH input").value = sessionStorage.getItem("hml_H") || ""; // Clave sessionStorage específica de HML
+    document.querySelector("#filaM input").value = sessionStorage.getItem("hml_M") || ""; // Clave sessionStorage específica de HML
+    document.querySelector("#filaL input").value = sessionStorage.getItem("hml_L") || ""; // Clave sessionStorage específica de HML
+    document.getElementById("ruido").value = sessionStorage.getItem("hml_lugarRuido") || ""; // Clave sessionStorage específica de HML
+    document.querySelector("#dbA input").value = sessionStorage.getItem("hml_dbA") || ""; // Clave sessionStorage específica de HML
+    document.querySelector("#dbC input").value = sessionStorage.getItem("hml_dbC") || ""; // Clave sessionStorage específica de HML
+    document.getElementById("cbox3").checked = sessionStorage.getItem("hml_cbox3") === "true"; // Clave sessionStorage específica de HML
 
-    document.querySelector("#filaRuidoAtenuadoHML input").value = sessionStorage.getItem("dbA_protegido") || "";
-    document.getElementById("indice-proteccionHML").textContent = sessionStorage.getItem("indiceProteccion") || "";
-    document.getElementById("indice-proteccionHML").style.backgroundColor = sessionStorage.getItem("indiceProteccionColor") || "transparent";
+    document.querySelector("#filaRuidoAtenuadoHML input").value = sessionStorage.getItem("hml_dbA_protegido") || ""; // Clave sessionStorage específica de HML
+    document.getElementById("indice-proteccionHML").textContent = sessionStorage.getItem("hml_indiceProteccion") || ""; // Clave sessionStorage específica de HML
+    document.getElementById("indice-proteccionHML").style.backgroundColor = sessionStorage.getItem("hml_indiceProteccionColor") || "transparent"; // Clave sessionStorage específica de HML
 });
-

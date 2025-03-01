@@ -642,12 +642,11 @@ button:hover {
     margin-top: 1rem;
   }
   
-
   .button-draw {
-
+    width: 100%;
     margin: 1rem 0;
-    align-self: center;
   }
+
 
     /* Ajustes para la tabla */
     table {

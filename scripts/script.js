@@ -47,27 +47,39 @@ function toggleMenu() {
     menu.classList.toggle("activo");
 }
 
-/* para abrir y cerrar el modal */
+/* para abrir y cerrar el modal acerca de */
 document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("modalAcerca");
-    const openModal = document.getElementById("openModal");
-    const closeModal = document.querySelector(".close");
+  // Get the modal "Acerca de"
+  const modalAcerca = document.getElementById("modalAcerca");
 
-    // Abrir el modal al hacer clic en el enlace
-    openModal.addEventListener("click", function (event) {
-        event.preventDefault(); // Evita que el enlace recargue la página
-        modal.style.display = "block";
-    });
+  // Get the link that opens the "Acerca de" modal
+  const openModal = document.getElementById("openModal");
 
-    // Cerrar el modal al hacer clic en la "X"
-    closeModal.addEventListener("click", function () {
-        modal.style.display = "none";
-    });
+  // Get the <span> element that closes the "Acerca de" modal - **CORRECTED SELECTOR HERE**
+  const spanCerrarModalAcerca = modalAcerca.querySelector(".close"); // Use modalAcerca.querySelector()
 
-    // Cerrar el modal si el usuario hace clic fuera del contenido
-    window.addEventListener("click", function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
+
+  // Abrir el modal al hacer clic en el enlace "Acerca de"
+  if (openModal) { // Check if openModal element exists
+      openModal.addEventListener("click", function (event) {
+          event.preventDefault(); // Evita que el enlace recargue la página
+          modalAcerca.style.display = "block";
+      });
+  }
+
+
+  // Cerrar el modal al hacer clic en la "X" (inside "Acerca de" modal)
+  if (spanCerrarModalAcerca) { // Check if spanCerrarModalAcerca exists
+      spanCerrarModalAcerca.onclick = function() {
+          modalAcerca.style.display = "none";
+      }
+  }
+
+
+  // Cerrar el modal si el usuario hace clic fuera del contenido del modal
+  window.onclick = function(event) {
+      if (event.target == modalAcerca) {
+          modalAcerca.style.display = "none";
+      }
+  }
 });

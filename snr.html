@@ -6,11 +6,74 @@
     <title>Atenuación de protectores auditivos</title>
     <link rel="stylesheet" href="./estilos/colores.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./estilos/styles1.css">
-    <script defer src="./scripts/script.js"></script>  
+    <link rel="stylesheet" href="./estilos/styles3.css">
+    <script defer src="./scripts/script.js"></script>
+    <script src="./lib/jszip.min.js"></script>
+    <script src="./lib/docxtemplater.min.js"></script>
+    <script src="./lib/FileSaver.min.js"></script>
+    <style> /* Estilos CSS para el Modal y las opciones de plantilla */
+        /* Estilos para el modal (general - puedes tenerlos en tu archivo CSS si prefieres) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            position: relative; /* Para posicionar el botón de cerrar */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute; /* Posicionamiento absoluto dentro de .modal-content */
+            top: 10px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilos para las opciones de plantilla (ya tenías algunos, los mantengo aquí) */
+        .plantilla-opciones {
+            margin-bottom: 15px;
+        }
+        .plantilla-opciones label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .modal-botones {
+            text-align: right; /* Alinea los botones a la derecha del modal */
+            margin-top: 20px;
+        }
+        .modal-botones button {
+            margin-left: 10px; /* Espacio entre botones en el modal */
+        }
+
+    </style>
 </head>
 <body>
-     
+
     <!-- Encabezado con Menú -->
     <header>
         <a href="https://isp65-sfe.infd.edu.ar/sitio/" target="_blank">
@@ -31,26 +94,108 @@
                 <div></div>
             </div>
         </nav>
-    </header>   
+    </header>
     <main>
     <!-- Contenedor principal -->
     <h2 class="section-title">CÁLCULO DE LA PROTECCIÓN AUDITIVA POR MÉTODO SNR</h2>
     <main class="contenedor-principal">
         <!-- Contenedor izquierdo -->
-        <div class="contenedor__izquierda">
-            <!-- Sección 1 -->
-            <section class="seccion1">Sección 1</section>
-            <!-- Sección 2 -->
-            <section class="seccion2">Sección 2</section>
-        </div>
+        <h3>El método SNR de cálculo de la protección auditiva utiliza:</h3>
 
-        <!-- Contenedor derecho -->
-        <div class="contenedor__derecha">
-            <!-- Sección 3 -->
-            <section class="seccion3">Sección 3</section>
-            <!-- Sección 4 -->
-            <section class="seccion4">Sección 4</section>
-        </div>
+        <ul >
+           <li class="titulo-info" >El valor SNR, dado por el proveedor de protectores auditivos</li>
+           <li class="titulo-info">Niveles de ruido ponderados C (LC o LCeq) en el lugar de trabajo</li>
+        </ul>
+
+        <div class="tablas">
+           <div class="contenedor__izquierda">
+               <div class="input-group">
+                   <p class="titulo-input">Protector auditivo:</p>
+                   <input type="text" id="protector-auditivo" class="input-name" placeholder="Nombre y modelo del protector"><br>
+               </div>
+               <!-- Sección 1 -->
+               <section class="seccion1">
+                   <h3> Valor SNR</h3>
+                   <table>
+                       <tr id="filaSNR">
+                           <th class="no-editable">SNR (dB)</th>
+                           <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                       </tr>
+                   </table>
+               </section>
+           </div>
+           <div class="contenedor__derecha">
+               <!-- Contenedor derecho -->
+                   <div class="input-group">
+                       <p class="titulo-input">Ruido del lugar de trabajo:</p>
+                       <input type="text" id="ruido" class="input-name" placeholder="Lugar/Sector/Equipo"><br>
+                   </div>
+                   <!-- Sección 3 -->
+                   <section class="seccion3">
+                       <h3> Valor medido</h3>
+                       <table>
+                           <tr id="dbC">
+                               <th class="no-editable">LeqC</th>
+                               <td class="editable"><input type="text" oninput="validarNumeroReal(this)"></td>
+                           </tr>
+                       </table>
+                   </section>
+               </div>
+       </div>
+       <!-- Sección 4 -->
+       <h3>Resultados</h3>
+       <section class="seccion4">
+           <table class="tabla-resultado" >
+               <tr>
+                   <th class="no-editable" ></th>
+                   <th class="leq-columna">LeqA'</th>
+
+                </tr>
+               <tr id="filaRuidoAtenuadoSNR">
+                   <th class="no-editable" >Nivel Ruido atenuado en el oído</th>
+                   <td class="leq-resultado" width="20px" fontsize="22"><input type="text" readonly></td>
+               </tr>
+           </table>
+           <div  class="real">
+               <label for="cbox3">Valor recomendado para el nivel de ruido probable en el oìdo (+4 dbA)</label>
+               <input class= "checkbox" type="checkbox" id="cbox3" value="second_checkbox" />
+           </div>
+           <div class="indice-group">
+               <p class="titulo-indice">Índice de protección:</p>
+               <p id="indice-proteccionSNR" class="resultado-indice">
+           </div>
+           <div class="botones">
+                <button class="button-draw" onclick="calcularTodoSNR()">
+                    <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
+                </button>
+                <button class="button-draw" onclick="borrarTodoSNR()">Borrar Todo</button>
+                <button class="button-draw" id="boton-informe" onclick="abrirModalPlantillaSNR()">Generar Informe</button>
+                <div id="modalPlantillaSNR" class="modal">
+                   <div class="modal-content">
+                       <span class="close" id="cerrarModalPlantillaSNR">×</span>
+                       <h2>Generar Informe</h2>
+                       <div class="plantilla-opciones">
+                           <p class="titulo-opciones">Seleccionar Plantilla:</p>
+                           <label>
+                               <input type="radio" name="plantillaModalSeleccionSNR" value="default" checked> Usar Plantilla Predeterminada
+                           </label>
+                           <label>
+                               <input type="radio" name="plantillaModalSeleccionSNR" value="subir"> Subir mi Plantilla (.docx o .dotx):
+                           </label>
+                           <input type="file" id="plantillaModalUploadSNR" accept=".docx,.dotx" style="display: none;">
+                       </div>
+                       <div class="modal-botones">
+                           <button class="button-draw" id="boton-generarInformeModalSNR">Generar Informe</button>
+                           <button class="button-draw" id="boton-cancelarInformeModalSNR">Cancelar</button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+       </div>
+       </section>
+
+
     </main>
      <!-- Pie de página -->
      <footer>
@@ -68,19 +213,19 @@
     <!-- Modal de "Acerca de" -->
     <div id="modalAcerca" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>Acerca de</h2>
-            <p class="text__modal">Esta es una aplicación web de código abierto bajo la 
+            <p class="text__modal">Esta es una aplicación web de código abierto bajo la
                 <a href="LICENSE.html" target="_blank">licencia MIT.</a>
             </p>
             <p class="text__modal">Desarrollado por: Ing. Jorge Mendoza</p>
-            <p class="text__modal">Versión 1.0.0 - 2025 - <a href="README.html" target="_blank">README.</a>
+            <p class="text__modal">Versión 1.1.0 - 2025 - <a href="README.html" target="_blank">README.</a>
 
             </p>
         </div>
     </div>
-   <!--  <script src="./scripts/app.js"></script> -->
+   <script src="./scripts/snr.js"></script>    <!-- informesnr -->
+   <script src="./scripts/appsnr.js"></script>
 
 </body>
 </html>
-

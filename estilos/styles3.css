@@ -1,0 +1,678 @@
+* /* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html {
+    font-size: 16px; /* 1rem = 16px */
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    background-color: var(--color-body); /* Gris oscuro */
+}
+
+/* Asegurar que el body ocupe toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* tablas de ruido y protectores auditivos*/
+table {
+  width: 25%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed; /* Ancho fijo para las columnas */
+  align-self: center;
+}
+th, td {
+  border: 1px solid var(--color-borde);
+  padding: 2px;
+   /*overflow: hidden; Oculta el contenido que se desborda 
+  white-space: nowrap;  Evita que el texto se ajuste a varias líneas */
+}
+th {
+  background-color: var(--color-secundario);
+}
+
+th:first-child, /* Selecciona el primer th de cada fila */
+td:first-child { /* Selecciona el primer td de cada fila */
+    width: 50%;
+}
+
+/* Header */
+header {
+    background-color: var(--color-header-fondo);
+    color:var(--color-header-texto);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    height: 5rem; /* La imagen tomará el 100% del header */
+    max-height: 5rem; /* Asegura que no supere el header */
+    width: auto;  /* Mantiene la proporción */
+    padding-top: 0.5rem;
+  }
+
+/*Título de la aplicación*/
+h1{
+    font-family: Montserrat;
+    font-weight: SemiBold;
+    font-size: 2.1rem;
+}
+
+h3 {
+  align-self: center;
+  padding-bottom: 0.5rem;
+}
+
+
+/* Footer fijo en la parte inferior */
+footer {
+    background-color: var(--color-footer-fondo); /* Gris oscuro */
+    color: var(--color-footer-texto);
+    text-align: center;
+    padding: 1%;
+    font-size: 1rem;
+    width: 100%;
+}
+/* estilo iconos en footer */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.94rem;
+  margin-top: 0.625rem;
+}
+
+.social-icons img {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Estilos para el modal */
+    /* Fondo oscuro cuando el modal está activo */
+    .modal {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-semitransparente)
+  }
+
+  /* Contenedor del modal */
+  .modal-content {
+      background-color: var(--color-modal-activo);
+      margin: 15% auto;
+      padding: 1.25rem;
+      width: 50%;
+      border-radius: 0.625rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+      text-align: center;
+      font-size: 1rem;
+  }
+
+  /* Botón de cierre (la "X") */
+  .close {
+      color: var(--color-secundario);
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+  .close:hover {
+      color: var(--color-resaltado);
+  }
+
+  /* Estilo para el enlace de "Acerca de" */
+  footer a {
+        color: var(--color-footer-texto);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    footer a:hover {
+        color: var(--color-resaltado);
+    }
+  .text__modal{
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+
+/* Menú de navegación */
+nav {
+  position: relative;
+  z-index: 2; /* El menú estará por encima de la imagen */
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu li {
+  display: inline;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--color-header-texto);
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Cambio de color al pasar el cursor */
+.menu a:hover {
+  color: var(--color-resaltado);
+}
+
+/* Cambio de color al hacer clic */
+.menu a.active {
+  color: var(--color-resaltado);
+}
+
+/* Menú hamburguesa (oculto en pantallas grandes) */
+.menu-hamburguesa {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-hamburguesa div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-header-texto);
+    border-radius: 2px;
+}
+
+/* --- TÍTULOS --- */
+
+.section-title {
+  font-family: "Montserrat", serif;
+  font-size: 1.75rem;
+  color:var(--color-titulo-principal);
+  margin: 1rem 0px;
+  text-align: center;
+}
+
+.titulo-info, .info {
+  font-size: 1.25rem;
+  text-align: left;
+  margin-bottom: 1rem;
+  margin-left: 5rem;
+}
+
+/* Contenedor principal */
+/* El main debe ocupar todo el espacio disponible */
+.contenedor-principal {
+  background-color: var(--color-secundario);
+  flex: 1; /* Hace que ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+ align-items: normal;
+  border-radius: 4rem 4rem 0 0;
+  border: 1px solid var(--color-borde);
+  width: 100%;
+  padding: 0rem;
+
+}
+
+/* Contenedores laterales */
+.contenedor__izquierda {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0rem;
+  margin-top: 0rem;
+  gap: 0rem;
+  border: 0px solid var(--color-borde);
+}
+.contenedor__derecha {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0rem;
+  margin-top: 0rem;
+  gap: 0rem;
+  border: 0px solid var(--color-borde);
+
+}
+
+/* esta seciion 1 contiene los datos de los protectores y ruido ambiental*/
+.seccion1{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content:center;
+  width: 100%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: var(--color-secundario);
+  padding: 0% 0% 1% 0%;
+ 
+}
+.seccion3{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: transparent;
+  padding: 0%;
+  margin-left: 0px;
+}
+
+.input-group {
+  display: flex; /* Para alinear el label y el input */
+  align-items: center; /* Alinea verticalmente */
+  flex-direction: column;
+}
+
+.input-group .titulo-input {
+  margin-right: 10px; /* Espacio entre el label y el input */
+  padding-bottom: 0.5rem;
+}
+
+.titulo-input{
+  font-family: Montserrat;
+  font-weight: SemiBold;
+  font-size: 1.25rem;
+  color: var(--color-texto);
+}
+.input-name {
+  background-color:var(--color-input-fondo);
+  color: var(--color-input);
+  opacity: 1;
+  width: 100%;
+  padding: 0.3125rem;
+  border: 0px solid var(--color-borde);
+  border-radius: 0.9375rem;
+  font-size: 1.25rem;
+  font-family: Montserrat;
+  font-weight: Bold;
+  text-align: left;
+}
+.input-name:hover {
+  background-color:var(--color-resaltado);
+}
+
+.tablas{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap:0rem;
+}
+
+
+/* Ajusta los estilos de las celdas no editables de la tabla */
+.no-editable {
+  background-color: var(--color-secundario);
+  padding: 1px;
+ 
+}
+
+/* Estilos comunes para inputs en celdas no editables de resultado y editables */
+.no-editable-resultado input[type="text"],
+.editable input[type="text"],
+.editable input[type="number"] {
+    outline: none;
+    border: 1px solid var(--color-borde);
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-input);
+    opacity: 1;
+    border-radius: 2px; /* Simplificado: 2px en todos los lados */
+    font-size: 20px;
+    font-family: Montserrat;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* Estilo específico para inputs no editables de resultado (solo el color de fondo) */
+.no-editable-resultado input[type="text"] {
+    background-color: var(--color-no-editable); /* Amarillo claro */
+}
+
+/* Estilo específico para inputs editables (solo el color de fondo) */
+.editable input[type="text"],
+.editable input[type="number"] {
+    background-color: var(--color-input-fondo);
+}
+
+.leq-resultado input { /* Apunta al input DENTRO de .leq-resultado */
+  outline: none;
+  border: 1px solid var(--color-borde);
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-text-no-editable);
+  opacity: 1;
+  border-radius: 2px; /* Simplificado: 2px en todos los lados */
+  font-size: 22px;
+  font-family: Montserrat;
+  font-weight: bold;
+  box-sizing: border-box;
+  background-color: var(--color-no-editable);
+  
+}
+
+/* Estilos para el td (opcional, para centrar el input o ajustar el espaciado) */
+.leq-resultado {
+  padding: 2px; /* Ejemplo: Ajusta el padding del td */
+  text-align: center; /* Ejemplo: Centra el input dentro del td */
+}
+.leq-columna{
+  width: 20%;
+}
+
+.tabla-resultadoHLM{
+  justify-self: center;
+  width: 20%;
+}
+
+.real{
+  display: flex;
+  width: 25%;
+  height: 20px;
+  justify-content: center;
+  align-self:center;
+  margin-left: 0px;
+  padding: 0px;
+}
+.checkbox{
+  margin-top: 5px;
+  top: 10px;
+  width: 30%;
+  position: relative;
+}
+label{
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.indice-group {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  margin-right: 0rem; /* Espacio entre el label y el input */
+  position: relative;
+  margin-top: 3rem;
+  width: 30%;
+}
+.titulo-indice{
+  font-family: Montserrat;
+  font-weight: SemiBold;
+  font-size: 1.25rem;
+  color: var(--color-texto);
+  height:55px ;
+}
+.resultado-indice {
+  opacity: 1;
+  border: 0px solid var(--color-borde);
+  border-radius: 0.9375rem;
+  font-size: 1.15rem;
+  font-family: Montserrat;
+  font-weight: Bold;
+  padding: 0.6rem;
+  width: 13rem;
+  display: flex; /* Convierte el elemento en un contenedor flexible */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 55px; /* Altura fija para el contenedor (ajusta según necesites) */
+  padding: 5px 10px; /* Ajusta el padding para que el texto no toque los bordes */
+}
+
+.seccion4{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  width: 100%;
+  height: auto;
+  border: 0px solid var(--color-borde);
+  background-color: var(--color-secundario);
+  padding: 0%;
+}
+button {
+  font-family: "Montserrat", bold;
+  border: 0.125rem var(--color-borde);
+  border-radius: 1.6rem;
+  box-shadow: 0 0.25rem 0.5rem var(--color-borde);
+  cursor: pointer;
+  align-items: center;
+  margin: 1rem;
+
+}
+.botones{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-evenly;
+
+}
+
+.button-draw {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  align-self: center;
+  justify-content:center;
+  background-color: var(--color-secundario);
+  width: 18rem;
+  font-size: 1rem;
+  height: 1.875rem;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background-color: var(--color-resaltado);
+}
+
+
+/* --- RESPONSIVIDAD --- */
+
+@media (max-width: 768px) {
+  /* Ajustes para el header */
+  header {
+    flex-direction: row; /* Header en fila */
+    justify-content: space-between; /* Distribuye el espacio entre elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    height: auto; /* Altura automática */
+    padding: 1rem;
+    flex-wrap: nowrap; /* Evita que los elementos se ajusten a varias líneas */
+  }
+
+  .logo {
+    height: 4rem; /* Logo más pequeño */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+
+  nav {
+    text-align: right; /* Alinea el menú a la derecha */
+  }
+
+  /* Ajustes para el menú */
+  .menu {
+    display: none;
+    flex-direction: column;
+    background-color: var(--color-header-fondo);
+    position: absolute;
+    right: 0;
+    top: 60px;
+    width: 150px;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+
+    .menu a {
+    display: block; /* Enlace en bloque */
+    padding: 0.5rem 0;
+    color: var(--color-header-texto); /* Asegurar el color del texto */
+    text-decoration: none; /* Quitar subrayado de enlaces */
+  }
+
+  .menu.activo {
+    display: flex; /* Mostrar menú cuando está activo */
+  }
+
+  .menu-hamburguesa {
+    display: flex; /* Mostrar menú hamburguesa */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .menu-hamburguesa div {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-header-texto);
+    border-radius: 2px;
+  }
+
+
+  table {
+    width: 50%;
+
+  }
+
+  /* Ajustes para el main */
+  .contenedor-principal {
+    width: 100%;
+    flex-direction: column; /* Una sola columna */
+    align-items: center;
+    margin-left: 0;
+    padding: 1rem;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  .contenedor__izquierda {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+  .contenedor__derecha {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+  .seccion1,  .seccion3, .seccion4 {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin: 1rem 0; /* Margen arriba y abajo */
+    padding: 0;
+  }
+
+
+  .tablas{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap:0rem;
+    width: 100%;
+  }
+
+  .tabla-resultado {
+    width: 60%; /* Tabla ocupa todo el ancho */
+  }
+
+  .input-name {
+    width: 100%; /* Inputs ocupan todo el ancho */
+  }
+
+  .real{
+    width: 65%;
+    justify-content: space-around;
+    
+  }
+
+
+  .indice-group {
+    width: 100%;
+    flex-direction: column; /* Título e índice en columna */
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 6rem;
+    position: relative;
+    
+  }
+
+  .titulo-indice{
+    margin-bottom: 1rem;
+    height: 1.25rem;
+  }
+  .resultado-indice{
+    width: 100%;
+  }
+
+  .botones{
+    flex-direction: column;
+
+    margin-top: 1rem;
+  }
+  
+
+  .button-draw {
+
+    margin: 1rem 0;
+    align-self: center;
+  }
+
+    /* Ajustes para la tabla */
+    table {
+      font-size: 0.8rem; /* Tamaño de fuente más pequeño para la tabla */
+    }
+  
+    th, td {
+      padding: 0.3rem; /* Ajustar padding para que quepa el texto */
+    }
+  
+    th:first-child,
+    td:first-child {
+      font-size: 0.9rem; /* Tamaño de fuente un poco más grande para la primera columna */
+    }
+  
+    /* Ajustes para los inputs */
+    input[type="text"]::placeholder {
+      font-size: 0.8rem; /* Tamaño de fuente más pequeño para los placeholders */
+    }
+
+
+
+
+  /* ... otros ajustes para elementos específicos si es necesario ... */
+}
+
+
+

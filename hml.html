@@ -11,6 +11,13 @@
     <script src="./lib/jszip.min.js"></script>
     <script src="./lib/docxtemplater.min.js"></script>
     <script src="./lib/FileSaver.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EEXJXBJBQB"></script>
+	<script>
+  	    window.dataLayer = window.dataLayer || [];
+  	    function gtag(){dataLayer.push(arguments);}
+  	    gtag('js', new Date());
+  	    gtag('config', 'G-EEXJXBJBQB');
+	</script>
     <style> /* Estilos CSS para el Modal y las opciones de plantilla */
         /* Estilos para el modal (general - puedes tenerlos en tu archivo CSS si prefieres) */
         .modal {
@@ -81,6 +88,7 @@
         <h1>ATENUA App</h1>
         <nav>
             <ul class="menu">
+
                 <li><a href="index.html">Información</a></li>
                 <li><a href="bandasoctava.html">Bandas de octava</a></li>
                 <li><a href="hml.html" class="active">HML</a></li>
@@ -179,7 +187,7 @@
                  <button class="button-draw" onclick="calcularTodoHML()">
                      <img src="./img/play_circle_outline.png" alt="Ícono para calcular">Calcular Protección Supuesta
                  </button>
-                 <button class="button-draw" onclick="borrarTodo()">Borrar Todo</button>
+                 <button class="button-draw" onclick="borrarTodoHML()">Borrar Todo</button>
                  <button class="button-draw" id="boton-informe" onclick="abrirModalPlantillaHML()">Generar Informe</button>
                  <div id="modalPlantillaHML" class="modal">
                     <div class="modal-content">
